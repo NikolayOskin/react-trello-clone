@@ -36,7 +36,7 @@ class Board extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 {this.state.todoLists.map((todoList, index) => <Column key={index} column={todoList}/>)}
             </div>
         );

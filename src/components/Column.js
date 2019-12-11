@@ -3,25 +3,38 @@ import Card from "./Card";
 
 class Column extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-            cardFormShowed: false
+            cardFormShowed: false,
+            cardText: ''
         }
-        this.showCardForm = this.showCardForm.bind(this);
-        this.hideCardForm = this.hideCardForm.bind(this);
-        this.addCard = this.addCard.bind(this);
+        this.showCardForm = this.showCardForm.bind(this)
+        this.hideCardForm = this.hideCardForm.bind(this)
+        this.addCard = this.addCard.bind(this)
+        this.changeCardText = this.changeCardText.bind(this)
     }
 
     showCardForm() {
-        this.setState(state => ({cardFormShowed: true}))
+        this.setState({cardFormShowed: true})
     }
 
     hideCardForm() {
-        this.setState(state => ({cardFormShowed: false}))
+        this.setState({cardFormShowed: false})
     }
 
     addCard() {
-        this.setState(state => ({cardFormShowed: false}))
+        if (this.state.cardText.length > 0) {
+            this.props.onCardAdded(this.props.index, this.state.cardText)
+            this.setState({
+                cardFormShowed: false,
+                cardText: ''
+            })
+        }
+
+    }
+
+    changeCardText(event) {
+        this.setState({cardText: event.target.value})
     }
 
     render() {
@@ -35,12 +48,21 @@ class Column extends Component {
 
                 <form action=""
                       className={"form form--card " + (this.state.cardFormShowed === false ? 'hidden' : '')}>
-                    <textarea className="form__input" rows="3" placeholder="Введите название карточки"></textarea>
+                    <textarea className="form__input"
+                              rows="3"
+                              placeholder="Введите название карточки"
+                              value={this.state.cardText}
+                              onChange={this.changeCardText}
+                    />
                     <div className="form__buttons">
-                        <button type="button" onClick={this.addCard} className="button button--submit button--submit-card">
+                        <button type="button"
+                                onClick={this.addCard}
+                                className="button button--submit button--submit-card">
                             Добавить карточку
                         </button>
-                        <button type="button" onClick={this.hideCardForm} className="button button--close button--close-card"></button>
+                        <button type="button"
+                                onClick={this.hideCardForm}
+                                className="button button--close button--close-card"></button>
                     </div>
                 </form>
 

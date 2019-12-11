@@ -32,12 +32,25 @@ class Board extends Component {
                 ]
             }]
         }
+        this.pushNewCard = this.pushNewCard.bind(this)
+    }
+
+    pushNewCard(index, cardText) {
+        let newTodoLists = this.state.todoLists
+        newTodoLists[index].items.unshift(cardText)
+        this.setState({
+            todoLists: newTodoLists
+        })
     }
 
     render() {
         return (
             <div className="container">
-                {this.state.todoLists.map((todoList, index) => <Column key={index} column={todoList}/>)}
+                {this.state.todoLists.map((todoList, index) => <Column key={index}
+                                                                       index={index}
+                                                                       column={todoList}
+                                                                       onCardAdded={this.pushNewCard}
+                />)}
             </div>
         );
     }

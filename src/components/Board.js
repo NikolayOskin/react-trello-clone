@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Column from "./Column";
+import NewColumn from "./NewColumn";
 
 class Board extends Component {
     constructor(props) {
@@ -33,11 +34,23 @@ class Board extends Component {
             }]
         }
         this.pushNewCard = this.pushNewCard.bind(this)
+        this.pushNewColumn = this.pushNewColumn.bind(this)
     }
 
     pushNewCard(index, cardText) {
         let newTodoLists = this.state.todoLists
         newTodoLists[index].items.unshift(cardText)
+        this.setState({
+            todoLists: newTodoLists
+        })
+    }
+
+    pushNewColumn(name) {
+        let newTodoLists = this.state.todoLists
+        newTodoLists.push({
+            name: name,
+            items: []
+        })
         this.setState({
             todoLists: newTodoLists
         })
@@ -51,6 +64,7 @@ class Board extends Component {
                                                                        column={todoList}
                                                                        onCardAdded={this.pushNewCard}
                 />)}
+                <NewColumn onColumnAdded={this.pushNewColumn}/>
             </div>
         );
     }

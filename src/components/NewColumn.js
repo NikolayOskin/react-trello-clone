@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import NewButton from "./ui/NewButton";
 
 class NewColumn extends Component {
     constructor(props) {
@@ -60,11 +61,8 @@ class NewColumn extends Component {
                     </div>
                 </form>
 
-                <div className={"add-new " + (this.state.formShowed ? 'hidden' : '')}>
-                    <button className="button button--new"
-                            onClick={this.showForm}
-                    >Добавить еще одну колонку</button>
-                </div>
+                {!this.state.formShowed &&
+                <NewButton text="Добавить еще одну колонку" onClicked={this.showForm}/>}
             </div>
         );
     }

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Card from "./Card";
 import NewButton from "./ui/NewButton";
+import SubmitButton from "./ui/Form/SubmitButton";
+import CloseButton from "./ui/Form/CloseButton";
 
 class Column extends Component {
     constructor(props) {
@@ -44,7 +46,7 @@ class Column extends Component {
                 <h2 className="column__title">{this.props.column.name}</h2>
 
                 <div className="cards">
-                    {this.props.column.items.map((card, index) => <Card key={index} card={card}/>)}
+                    {this.props.column.items.map((card, i) => <Card key={i} card={card}/>)}
                 </div>
 
                 <form action=""
@@ -56,14 +58,8 @@ class Column extends Component {
                               onChange={this.changeCardText}
                     />
                     <div className="form__buttons">
-                        <button type="button"
-                                onClick={this.addCard}
-                                className="button button--submit button--submit-card">
-                            Добавить карточку
-                        </button>
-                        <button type="button"
-                                onClick={this.hideCardForm}
-                                className="button button--close button--close-card"></button>
+                        <SubmitButton onSubmited={this.addCard} text="Добавить карточку"/>
+                        <CloseButton onClicked={this.hideCardForm} />
                     </div>
                 </form>
 

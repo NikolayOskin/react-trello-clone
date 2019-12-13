@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import NewButton from "./ui/NewButton";
+import SubmitButton from "./ui/Form/SubmitButton";
+import CloseButton from "./ui/Form/CloseButton";
 
 class NewColumn extends Component {
     constructor(props) {
@@ -47,17 +49,8 @@ class NewColumn extends Component {
                     />
 
                     <div className="form__buttons">
-                        <button type="button"
-                                className="button button--submit button--submit-column"
-                                onClick={this.addColumn}
-                        >
-                            Добавить колонку
-                        </button>
-
-                        <button type="button"
-                                className="button button--close button--close-column"
-                                onClick={this.hideForm}
-                        ></button>
+                        <SubmitButton onSubmited={this.addColumn} text="Добавить колонку"/>
+                        <CloseButton onClicked={this.hideForm} />
                     </div>
                 </form>
 

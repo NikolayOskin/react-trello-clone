@@ -52,7 +52,6 @@ class Column extends Component {
                         <div
                             className="cards"
                             ref={provided.innerRef}
-                            style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey' }}
                             {...provided.droppableProps}
                         >
                             {this.props.column.items.map((card, i) => <Card key={i} index={i} column={this.props.index} card={card}/>)}

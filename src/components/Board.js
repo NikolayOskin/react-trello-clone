@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Column from "./Column";
 import NewColumn from "./NewColumn";
+import { DragDropContext } from 'react-beautiful-dnd';
 
 class Board extends Component {
     constructor(props) {
@@ -56,16 +57,22 @@ class Board extends Component {
         })
     }
 
+    onDragEnd = result => {
+        console.log(result);
+    }
+
     render() {
         return (
-            <div className="container">
-                {this.state.todoLists.map((todoList, index) => <Column key={index}
-                                                                       index={index}
-                                                                       column={todoList}
-                                                                       onCardAdded={this.pushNewCard}
-                />)}
-                <NewColumn onColumnAdded={this.pushNewColumn}/>
-            </div>
+            <DragDropContext onDragEnd={this.onDragEnd}>
+                <div className="container">
+                    {this.state.todoLists.map((todoList, i) => <Column key={i}
+                                                                           index={i}
+                                                                           column={todoList}
+                                                                           onCardAdded={this.pushNewCard}
+                    />)}
+                    <NewColumn onColumnAdded={this.pushNewColumn}/>
+                </div>
+            </DragDropContext>
         );
     }
 }

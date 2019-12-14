@@ -3,6 +3,8 @@ import Card from "./Card";
 import NewButton from "./ui/NewButton";
 import SubmitButton from "./ui/Form/SubmitButton";
 import CloseButton from "./ui/Form/CloseButton";
+import { Droppable } from 'react-beautiful-dnd';
+
 
 class Column extends Component {
     constructor(props) {
@@ -45,9 +47,20 @@ class Column extends Component {
             <div className="column">
                 <h2 className="column__title">{this.props.column.name}</h2>
 
-                <div className="cards">
-                    {this.props.column.items.map((card, i) => <Card key={i} card={card}/>)}
-                </div>
+                <Droppable droppableId={"droppable-" + this.props.index}>
+                    {(provided, snapshot) => (
+                        <div
+                            className="cards"
+                            ref={provided.innerRef}
+                            style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey' }}
+                            {...provided.droppableProps}
+                        >
+                            {this.props.column.items.map((card, i) => <Card key={i} index={i} column={this.props.index} card={card}/>)}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+
 
                 <form action=""
                       className={"form form--card " + (this.state.cardFormShowed === false ? 'hidden' : '')}>

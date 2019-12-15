@@ -28,8 +28,8 @@ class Column extends Component {
     }
 
     addCard() {
-        if (this.state.cardText.length > 0) {
-            this.props.onCardAdded(this.props.index, this.state.cardText)
+        if (this.state.cardText.trim().length > 0) {
+            this.props.onCardAdded(this.props.index, this.state.cardText.trim())
             this.setState({
                 cardFormShowed: false,
                 cardText: ''

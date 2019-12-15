@@ -30,8 +30,8 @@ class NewColumn extends Component {
     }
 
     addColumn() {
-        if (this.state.columnName.length > 0) {
-            this.props.onColumnAdded(this.state.columnName)
+        if (this.state.columnName.trim().length > 0) {
+            this.props.onColumnAdded(this.state.columnName.trim())
             this.setState({
                 columnName: '',
                 formShowed: false

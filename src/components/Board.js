@@ -58,7 +58,22 @@ class Board extends Component {
     }
 
     onDragEnd = result => {
-        console.log(result);
+        const { source, destination } = result;
+
+        // dropped outside the list
+        if (!destination) {
+            return;
+        }
+
+        let todoLists = this.state.todoLists;
+        let sourceListId = source.droppableId.split('-')[1];
+        let destinationListId = destination.droppableId.split('-')[1];
+
+        // move item inside the list
+        const [removed] = todoLists[sourceListId].items.splice(source.index, 1);
+        todoLists[destinationListId].items.splice(destination.index, 0, removed);
+
+        this.setState({todoLists});
     }
 
     render() {

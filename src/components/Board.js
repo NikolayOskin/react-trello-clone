@@ -39,22 +39,18 @@ class Board extends Component {
     }
 
     pushNewCard(index, cardText) {
-        let newTodoLists = this.state.todoLists
-        newTodoLists[index].items.unshift(cardText)
-        this.setState({
-            todoLists: newTodoLists
-        })
+        let todoLists = this.state.todoLists
+        todoLists[index].items.unshift(cardText)
+        this.setState({ todoLists })
     }
 
     pushNewColumn(name) {
-        let newTodoLists = this.state.todoLists
-        newTodoLists.push({
+        let todoLists = this.state.todoLists
+        todoLists.push({
             name: name,
             items: []
         })
-        this.setState({
-            todoLists: newTodoLists
-        })
+        this.setState({ todoLists })
     }
 
     onDragEnd = result => {

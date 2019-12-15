@@ -14,6 +14,7 @@ class NewColumn extends Component {
         this.updateColumnName = this.updateColumnName.bind(this)
         this.showForm = this.showForm.bind(this)
         this.hideForm = this.hideForm.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     showForm() {
@@ -38,10 +39,17 @@ class NewColumn extends Component {
         }
     }
 
+    handleSubmit(event) {
+        event.preventDefault()
+        this.addColumn()
+    }
+
     render() {
         return (
             <div className="column">
-                <form action="" className={"form form--new-column " + (!this.state.formShowed ? 'hidden' : '')}>
+                <form action=""
+                      onSubmit={this.handleSubmit}
+                      className={"form form--new-column " + (!this.state.formShowed ? 'hidden' : '')}>
                     <input className="form__input form__input--column"
                            value={this.state.columnName}
                            placeholder="Введите название колонки"

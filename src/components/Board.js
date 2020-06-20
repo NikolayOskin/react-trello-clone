@@ -74,16 +74,18 @@ class Board extends Component {
 
     render() {
         return (
-            <DragDropContext onDragEnd={this.onDragEnd}>
-                <div className="container">
-                    {this.state.todoLists.map((todoList, i) => <Column key={i}
-                                                                           index={i}
-                                                                           column={todoList}
-                                                                           onCardAdded={this.pushNewCard}
-                    />)}
-                    <NewColumn onColumnAdded={this.pushNewColumn}/>
-                </div>
-            </DragDropContext>
+            <div className="board">
+                <DragDropContext onDragEnd={this.onDragEnd}>
+                    <div className="container">
+                        {this.state.todoLists.map((todoList, i) => <Column key={i}
+                                                                               index={i}
+                                                                               column={todoList}
+                                                                               onCardAdded={this.pushNewCard}
+                        />)}
+                        <NewColumn onColumnAdded={this.pushNewColumn}/>
+                    </div>
+                </DragDropContext>
+            </div>
         );
     }
 }

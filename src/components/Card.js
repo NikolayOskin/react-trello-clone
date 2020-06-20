@@ -2,9 +2,9 @@ import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
 const Card = ({ index, column, card}) => {
-    const getItemStyle = (isDragging, { transform, ...draggableStyles }) => ({
+    const getItemStyle = (isDragging, { background, ...draggableStyles }) => ({
         userSelect: 'none',
-        transform: isDragging ? (transform + "rotate(5deg)") : transform,
+        background: isDragging ? "#DCDCDC" : background,
         ...draggableStyles
     });
 

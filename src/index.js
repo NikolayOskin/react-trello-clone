@@ -3,8 +3,22 @@ import ReactDOM from 'react-dom';
 import './styles/_reset.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from "react-redux";
+import rootReducer from "./redux/reducers/root";
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { setAuthToken } from "./utils/authToken";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+setAuthToken(localStorage.getItem("jwtToken"));
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
